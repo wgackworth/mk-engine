@@ -61,4 +61,35 @@ void mk_gfx_unbindVBO(const mk_gfx_VBO VBO);
  */
 void mk_gfx_deleteVBO(const mk_gfx_VBO VBO);
 
+/**
+ * @brief Structure representing an OpenGL Element Buffer Object (EBO).
+ */
+typedef struct mk_gfx_EBO
+{
+  GLuint ID;
+} mk_gfx_EBO;
+
+/**
+ * @brief Creates an Element Buffer Object (EBO) and fills it with data.
+ * @param indices Pointer to the index data.
+ * @param size Size of the index data in bytes.
+ * @return An EBO.
+ */
+mk_gfx_EBO mk_gfx_emergeEBO(GLuint* indices, GLsizeiptr size);
+/**
+ * @brief Binds the specified EBO.
+ * @param EBO The EBO to bind.
+ */
+void mk_gfx_bindEBO(const mk_gfx_EBO EBO);
+/**
+ * @brief Unbinds the specified EBO.
+ * @param EBO The EBO to unbind.
+ */
+void mk_gfx_unbindEBO(const mk_gfx_EBO EBO);
+/**
+ * @brief Deletes the specified EBO.
+ * @param EBO The EBO to delete.
+ */
+void mk_gfx_deleteEBO(const mk_gfx_EBO EBO);
+
 #endif // MK_OBJECTS_H
