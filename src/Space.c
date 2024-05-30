@@ -188,3 +188,12 @@ mk_Vec3 mk_crossVec3(const mk_Vec3 vecOne, const mk_Vec3 vecTwo)
   };
   return result;
 }
+
+mk_Mat4 mk_emergeMat4(const float diagonalValue)
+{
+  mk_Mat4 mat;
+  for (int y = 0; y < 4; y++)
+    for (int x = 0; x < 4; x++)
+      mat.elements[y][x] = x == y ? diagonalValue : 0.f;
+  return mat;
+}

@@ -36,6 +36,10 @@ int main()
     )
   );
 
+  // Matrix Testing
+  mk_Mat4 matOne = mk_emergeMat4(1.f);
+  mk_printMat4(matOne);
+
   // Initializing GLFW
   bool glfwSuccess = mk_initializeGlfw();
   if (!glfwSuccess)

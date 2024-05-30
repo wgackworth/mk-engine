@@ -156,4 +156,19 @@ float mk_dotVec3(const mk_Vec3 vecOne, const mk_Vec3 vecTwo);
  */
 mk_Vec3 mk_crossVec3(const mk_Vec3 vecOne, const mk_Vec3 vecTwo);
 
+/**
+ * @brief Structure representing a 4x4 matrix.
+ */
+typedef struct mk_Mat4
+{
+  float elements[4][4];
+} mk_Mat4;
+
+/**
+ * @brief Creates a 4x4 matrix with the specified diagonal value.
+ * @param diagonalValue The value to set on the diagonal elements of the matrix.
+ * @return A 4x4 matrix with diagonal elements set to the specified value.
+ */
+mk_Mat4 mk_emergeMat4(const float diagonalValue);
+
 #endif // MK_SPACE_H
