@@ -170,5 +170,47 @@ typedef struct mk_Mat4
  * @return A 4x4 matrix with diagonal elements set to the specified value.
  */
 mk_Mat4 mk_emergeMat4(const float diagonalValue);
+/**
+ * @brief Adds two 4x4 matrices.
+ * @param matOne The first matrix.
+ * @param matTwo The second matrix.
+ * @return The result of adding the two matrices.
+ */
+mk_Mat4 mk_addMat4(const mk_Mat4 matOne, const mk_Mat4 matTwo);
+/**
+ * @brief Subtracts the second 4x4 matrix from the first.
+ * @param matOne The first matrix.
+ * @param matTwo The second matrix.
+ * @return The result of subtracting matTwo from matOne.
+ */
+mk_Mat4 mk_subMat4(const mk_Mat4 matOne, const mk_Mat4 matTwo);
+/**
+ * @brief Multiplies a 4x4 matrix by an integer scalar.
+ * @param mat The matrix to multiply.
+ * @param scalar The scalar value to multiply by.
+ * @return The result of the multiplication.
+ */
+mk_Mat4 mk_multMat4Int(mk_Mat4 mat, const int scalar);
+/**
+ * @brief Multiplies a 4x4 matrix by a float scalar.
+ * @param mat The matrix to multiply.
+ * @param scalar The scalar value to multiply by.
+ * @return The result of the multiplication.
+ */
+mk_Mat4 mk_multMat4Float(mk_Mat4 mat, const float scalar);
+/**
+ * @brief Multiplies a 4x4 matrix by a double scalar.
+ * @param mat The matrix to multiply.
+ * @param scalar The scalar value to multiply by.
+ * @return The result of the multiplication.
+ */
+mk_Mat4 mk_multMat4Double(mk_Mat4 mat, const double scalar);
+/**
+ * @brief Multiplies two 4x4 matrices.
+ * @param matOne The first matrix.
+ * @param matTwo The second matrix.
+ * @return The result of multiplying the two matrices.
+ */
+mk_Mat4 mk_multMat4Mat4(const mk_Mat4 matOne, const mk_Mat4 matTwo);
 
 #endif // MK_SPACE_H

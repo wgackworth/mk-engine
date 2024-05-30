@@ -38,7 +38,14 @@ int main()
 
   // Matrix Testing
   mk_Mat4 matOne = mk_emergeMat4(1.f);
-  mk_printMat4(matOne);
+  mk_Mat4 matTwo = mk_emergeMat4(2.f);
+  mk_Mat4 matThree = mk_emergeMat4(3.f);
+  mk_printMat4(
+    mk_multMat4Mat4(
+      mk_multMat4Float(mk_addMat4(matOne, matTwo), 2.f),
+      matThree
+    )
+  );
 
   // Initializing GLFW
   bool glfwSuccess = mk_initializeGlfw();

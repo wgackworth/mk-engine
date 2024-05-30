@@ -197,3 +197,58 @@ mk_Mat4 mk_emergeMat4(const float diagonalValue)
       mat.elements[y][x] = x == y ? diagonalValue : 0.f;
   return mat;
 }
+
+mk_Mat4 mk_addMat4(const mk_Mat4 matOne, const mk_Mat4 matTwo)
+{
+  mk_Mat4 mat;
+  for (int y = 0; y < 4; y++)
+    for (int x = 0; x < 4; x++)
+      mat.elements[y][x] = matOne.elements[y][x] + matTwo.elements[y][x];
+  return mat;
+}
+
+mk_Mat4 mk_subMat4(const mk_Mat4 matOne, const mk_Mat4 matTwo)
+{
+  mk_Mat4 mat;
+  for (int y = 0; y < 4; y++)
+    for (int x = 0; x < 4; x++)
+      mat.elements[y][x] = matOne.elements[y][x] - matTwo.elements[y][x];
+  return mat;
+}
+
+mk_Mat4 mk_multMat4Int(mk_Mat4 mat, const int scalar)
+{
+  for (int y = 0; y < 4; y++)
+    for (int x = 0; x < 4; x++)
+      mat.elements[y][x] *= scalar;
+  return mat;
+}
+
+mk_Mat4 mk_multMat4Float(mk_Mat4 mat, const float scalar)
+{
+  for (int y = 0; y < 4; y++)
+    for (int x = 0; x < 4; x++)
+      mat.elements[y][x] *= scalar;
+  return mat;
+}
+
+mk_Mat4 mk_multMat4Double(mk_Mat4 mat, const double scalar)
+{
+  for (int y = 0; y < 4; y++)
+    for (int x = 0; x < 4; x++)
+      mat.elements[y][x] *= scalar;
+  return mat;
+}
+
+mk_Mat4 mk_multMat4Mat4(const mk_Mat4 matOne, const mk_Mat4 matTwo)
+{
+  mk_Mat4 mat;
+  for (int i = 0; i < 4; i++)
+    for (int j = 0; j < 4; j++)
+    {
+      mat.elements[i][j] = 0.f;
+      for (int k = 0; k < 4; k++)
+        mat.elements[i][j] += matOne.elements[i][k] * matTwo.elements[k][j];
+    }
+  return mat;
+}
