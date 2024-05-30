@@ -2,6 +2,7 @@
 add_library(
   MK
   File.c
+  Color.c
   Graphics.c
   Objects.c
 )

@@ -59,11 +59,8 @@ int main()
   }
 
   // Clear Color
-  GLclampf red   = 0.0f;
-  GLclampf green = 0.0f;
-  GLclampf blue  = 0.0f;
-  GLclampf alpha = 1.0f;
-  glClearColor(red, green, blue, alpha);
+  mk_RGBA clearColor = mk_emergeRGBA(0, 0, 0, 1.f);
+  mk_gfx_useClearColor(clearColor);
 
   // Default Shader
   mk_gfx_Shader defaultShader = mk_gfx_emergeShader(
