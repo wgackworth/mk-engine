@@ -15,8 +15,6 @@ find_library(GLFW_LIB NAMES glfw3 HINTS "${CMAKE_SOURCE_DIR}/lib/linux")
 # Include Directories
 include_directories("${CMAKE_SOURCE_DIR}/include")
 
-# Library Binaries
-link_libraries(m GL ${GLEW_LIB} ${GLFW_LIB})
-
 # Subdirectories
+add_subdirectory(src)
 add_subdirectory(examples)
