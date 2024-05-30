@@ -5,6 +5,8 @@ add_library(
   Constants.c
   File.c
   Color.c
+  Space.c
+  Debug.c
   Graphics.c
   Window.c
   Objects.c

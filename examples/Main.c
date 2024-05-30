@@ -26,6 +26,11 @@ GLuint indices[] = {
 
 int main()
 {
+  // Vector Testing
+  mk_Vec2 vecOne = mk_emergeVec2(1.f, 3.f);
+  mk_Vec2 vecTwo = mk_emergeVec2(4.f, -1.f);
+  mk_printVec2(mk_subVec2(vecOne, vecTwo));
+
   // Initializing GLFW
   bool glfwSuccess = mk_initializeGlfw();
   if (!glfwSuccess)

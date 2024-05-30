@@ -10,6 +10,8 @@
 #include "Core/Constants.h"
 #include "Core/File.h"
 #include "Core/Color.h"
+#include "Core/Space.h"
+#include "Core/Debug.h"
 
 /**
  * @brief Initializes GLFW.
