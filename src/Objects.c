@@ -76,6 +76,12 @@ void mk_gfx_deleteShader(const mk_gfx_Shader shader)
   glDeleteProgram(shader.ID);
 }
 
+void mk_gfx_shaderSetMat4(const mk_gfx_Shader shader, const mk_Mat4* mat, const char* uniform)
+{
+  GLuint matLoc = glGetUniformLocation(shader.ID, uniform);
+  glUniformMatrix4fv(matLoc, 1, GL_FALSE, mk_valuePointerMat4(mat));
+}
+
 mk_gfx_VBO mk_gfx_emergeVBO(GLfloat* vertices, GLsizeiptr size)
 {
   GLuint ID;

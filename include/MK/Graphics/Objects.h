@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <MK/Core/File.h>
+#include <MK/Core/Space.h>
 
 /**
  * @brief Structure representing an OpenGL shader program.
@@ -31,6 +32,13 @@ void mk_gfx_useShader(const mk_gfx_Shader shader);
  * @param shader The shader program to delete.
  */
 void mk_gfx_deleteShader(const mk_gfx_Shader shader);
+/**
+ * @brief Sets a 4x4 matrix uniform in a shader program.
+ * @param shader The shader program to set the uniform in.
+ * @param mat Pointer to the matrix to set.
+ * @param uniform Name of the uniform in the shader.
+ */
+void mk_gfx_shaderSetMat4(const mk_gfx_Shader shader, const mk_Mat4* mat, const char* uniform);
 
 /**
  * @brief Structure representing an OpenGL Vertex Buffer Object (VBO).

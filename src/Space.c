@@ -252,3 +252,20 @@ mk_Mat4 mk_multMat4Mat4(const mk_Mat4 matOne, const mk_Mat4 matTwo)
     }
   return mat;
 }
+
+const float* mk_valuePointerMat4(const mk_Mat4* mat)
+{
+  return &mat->elements[0][0];
+}
+
+mk_Mat4 mk_ortho(const float left, const float right, const float bottom, const float top, const float zNear, const float zFar)
+{
+  mk_Mat4 result = mk_emergeMat4(1.f);
+  result.elements[0][0] =  2.f / (right - left);
+  result.elements[1][1] =  2.f / (top - bottom);
+  result.elements[2][2] = -2.f / (zFar - zNear);
+  result.elements[3][0] = -(right + left) / (right - left);
+  result.elements[3][1] = -(top + bottom) / (top - bottom);
+  result.elements[3][2] = -(zFar + zNear) / (zFar - zNear);
+  return result;
+}

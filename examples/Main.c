@@ -11,42 +11,18 @@ const char*        WINDOW_TITLE  = "GLFW";
 
 // Vertices and Indices
 GLfloat vertices[] = {
-  -0.5f,  -0.5f, 0.0f, 1.f, 1.f, 1.f,
-   0.0f,  -0.5f, 0.0f, 1.f, 1.f, 1.f,
-   0.5f,  -0.5f, 0.0f, 1.f, 1.f, 1.f,
-  -0.25f,  0.0f, 0.0f, 1.f, 1.f, 1.f,
-   0.25f,  0.0f, 0.0f, 1.f, 1.f, 1.f,
-   0.0f,   0.5f, 0.0f, 1.f, 1.f, 1.f,
+  0.f,  0.f,  1.f, 1.f, 1.f,
+  32.f, 0.f,  1.f, 1.f, 1.f,
+  0.f,  32.f, 1.f, 1.f, 1.f,
+  32.f, 32.f, 1.f, 1.f, 1.f,
 };
 GLuint indices[] = {
-  0, 1, 3,
-  1, 2, 4,
-  3, 4, 5,
+  2, 3, 1,
+  2, 1, 0,
 };
 
 int main()
 {
-  // Vector Testing
-  mk_Vec3 vecOne = mk_emergeVec3(1.f, 3.f, 4.f);
-  mk_Vec3 vecTwo = mk_emergeVec3(4.f, -1.f, -3.f);
-  mk_printVec3(
-    mk_crossVec3(
-      vecOne,
-      vecTwo
-    )
-  );
-
-  // Matrix Testing
-  mk_Mat4 matOne = mk_emergeMat4(1.f);
-  mk_Mat4 matTwo = mk_emergeMat4(2.f);
-  mk_Mat4 matThree = mk_emergeMat4(3.f);
-  mk_printMat4(
-    mk_multMat4Mat4(
-      mk_multMat4Float(mk_addMat4(matOne, matTwo), 2.f),
-      matThree
-    )
-  );
-
   // Initializing GLFW
   bool glfwSuccess = mk_initializeGlfw();
   if (!glfwSuccess)
@@ -89,8 +65,8 @@ int main()
   mk_gfx_bindVBO(VBO);
   mk_gfx_bindEBO(EBO);
 
-  mk_gfx_linkAttribVAO(&VBO, 0, 3, GL_FLOAT, 6 * sizeof(GLfloat), (void*)0);
-  mk_gfx_linkAttribVAO(&VBO, 1, 3, GL_FLOAT, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
+  mk_gfx_linkAttribVAO(&VBO, 0, 2, GL_FLOAT, 5 * sizeof(GLfloat), (void*)0);
+  mk_gfx_linkAttribVAO(&VBO, 1, 3, GL_FLOAT, 5 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 
   mk_gfx_unbindVAO(VAO);
   mk_gfx_unbindVBO(VBO);
@@ -115,6 +91,21 @@ int main()
     { mk_gfx_useLineMode(); }
     else if (mk_isKeyPressed(&window, MK_KEY_B))
     { mk_gfx_useFillMode(); }
+
+    mk_Mat4 model = mk_emergeMat4(1.f);
+    mk_Mat4 view = mk_emergeMat4(1.f);
+    mk_Mat4 projection = mk_ortho(
+      0.f,
+      (float)WINDOW_WIDTH,
+      (float)WINDOW_HEIGHT,
+      0.f,
+      -1.f,
+      1.f
+    );
+
+    mk_gfx_shaderSetMat4(defaultShader, &model, "model");
+    mk_gfx_shaderSetMat4(defaultShader, &view, "view");
+    mk_gfx_shaderSetMat4(defaultShader, &projection, "projection");
 
     mk_gfx_clearWindow(&window);
     mk_gfx_useShader(defaultShader);

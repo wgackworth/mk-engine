@@ -213,4 +213,23 @@ mk_Mat4 mk_multMat4Double(mk_Mat4 mat, const double scalar);
  */
 mk_Mat4 mk_multMat4Mat4(const mk_Mat4 matOne, const mk_Mat4 matTwo);
 
+/**
+ * @brief Returns a pointer to the first element of a 4x4 matrix.
+ * @param mat Pointer to the matrix.
+ * @return Pointer to the first element of the matrix.
+ */
+const float* mk_valuePointerMat4(const mk_Mat4* mat);
+
+/**
+ * @brief Creates an orthographic projection matrix.
+ * @param left The coordinate for the left vertical clipping plane.
+ * @param right The coordinate for the right vertical clipping plane.
+ * @param bottom The coordinate for the bottom horizontal clipping plane.
+ * @param top The coordinate for the top horizontal clipping plane.
+ * @param zNear The distance to the near depth clipping plane.
+ * @param zFar The distance to the far depth clipping plane.
+ * @return The orthographic projection matrix.
+ */
+mk_Mat4 mk_ortho(const float left, const float right, const float bottom, const float top, const float zNear, const float zFar);
+
 #endif // MK_SPACE_H
