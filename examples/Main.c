@@ -2,6 +2,7 @@
 #include <MK/Graphics.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 // Window Settings
 const unsigned int WINDOW_WIDTH  = 800u;
@@ -26,11 +27,11 @@ GLuint indices[] = {
 int main()
 {
   // Initializing GLFW
-  glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+  bool glfwSuccess = mk_initializeGlfw();
+  if (!glfwSuccess)
+  {
+    return EXIT_FAILURE;
+  }
 
   // Creating the Window
   GLFWwindow* window = glfwCreateWindow(
@@ -43,18 +44,17 @@ int main()
   if (window == NULL)
   {
     fprintf(stderr, "Failed to create a GLFW Window!\n");
-    glfwTerminate();
+    mk_terminate();
     return EXIT_FAILURE;
   }
   glfwMakeContextCurrent(window);
 
   // Initializing GLEW
-  GLenum glewErr = glewInit();
-  if (glewErr != GLEW_OK)
+  bool glewSuccess = mk_initializeGlew();
+  if (!glewSuccess)
   {
-    fprintf(stderr, "Failed to initialize GLEW!\n");
-    fprintf(stderr, "Error: %s", glewGetErrorString(glewErr));
-    glfwTerminate();
+    glfwDestroyWindow(window);
+    mk_terminate();
     return EXIT_FAILURE;
   }
 
@@ -109,6 +109,6 @@ int main()
   mk_gfx_deleteEBO(EBO);
   mk_gfx_deleteShader(defaultShader);
   glfwDestroyWindow(window);
-  glfwTerminate();
+  mk_terminate();
   return EXIT_SUCCESS;
 }
