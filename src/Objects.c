@@ -75,3 +75,34 @@ void mk_gfx_deleteShader(const mk_gfx_Shader shader)
 {
   glDeleteProgram(shader.ID);
 }
+
+mk_gfx_VBO mk_gfx_emergeVBO(GLfloat* vertices, GLsizeiptr size)
+{
+  GLuint ID;
+
+  glGenBuffers(1, &ID);
+  glBindBuffer(GL_ARRAY_BUFFER, ID);
+  glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  mk_gfx_VBO VBO =
+  {
+    .ID = ID
+  };
+  return VBO;
+}
+
+void mk_gfx_bindVBO(const mk_gfx_VBO VBO)
+{
+  glBindBuffer(GL_ARRAY_BUFFER, VBO.ID);
+}
+
+void mk_gfx_unbindVBO(const mk_gfx_VBO VBO)
+{
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void mk_gfx_deleteVBO(const mk_gfx_VBO VBO)
+{
+  glDeleteBuffers(1, &VBO.ID);
+}
