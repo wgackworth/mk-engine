@@ -33,27 +33,18 @@ int main()
     return EXIT_FAILURE;
   }
 
-  // Creating the Window
-  GLFWwindow* window = glfwCreateWindow(
-    WINDOW_WIDTH,
-    WINDOW_HEIGHT,
+  // Window
+  mk_gfx_Window window = mk_gfx_emergeWindow(
     WINDOW_TITLE,
-    NULL,
-    NULL
+    WINDOW_WIDTH,
+    WINDOW_HEIGHT
   );
-  if (window == NULL)
-  {
-    fprintf(stderr, "Failed to create a GLFW Window!\n");
-    mk_terminate();
-    return EXIT_FAILURE;
-  }
-  glfwMakeContextCurrent(window);
 
   // Initializing GLEW
   bool glewSuccess = mk_initializeGlew();
   if (!glewSuccess)
   {
-    glfwDestroyWindow(window);
+    mk_gfx_destroyWindow(&window);
     mk_terminate();
     return EXIT_FAILURE;
   }
@@ -93,14 +84,14 @@ int main()
   mk_printVersionInfo();
 
   // Main Loop
-  while (!glfwWindowShouldClose(window))
+  while (mk_gfx_isWindowOpen(&window))
   {
-    glfwPollEvents();
-    glClear(GL_COLOR_BUFFER_BIT);
+    mk_gfx_updateWindow(&window);
+    mk_gfx_clearWindow(&window);
     mk_gfx_useShader(defaultShader);
     mk_gfx_bindVAO(VAO);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);
-    glfwSwapBuffers(window);
+    mk_gfx_displayWindow(&window);
   }
 
   // Termination
@@ -108,7 +99,7 @@ int main()
   mk_gfx_deleteVBO(VBO);
   mk_gfx_deleteEBO(EBO);
   mk_gfx_deleteShader(defaultShader);
-  glfwDestroyWindow(window);
+  mk_gfx_destroyWindow(&window);
   mk_terminate();
   return EXIT_SUCCESS;
 }

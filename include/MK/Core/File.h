@@ -1,8 +1,7 @@
 #ifndef MK_FILE_H
 #define MK_FILE_H
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <MK/Core.h>
 
 /**
  * @brief Reads file contents into a string.

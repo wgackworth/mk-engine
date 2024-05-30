@@ -6,6 +6,7 @@ add_library(
   File.c
   Color.c
   Graphics.c
+  Window.c
   Objects.c
 )
 

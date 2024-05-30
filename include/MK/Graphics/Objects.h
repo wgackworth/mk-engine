@@ -1,8 +1,7 @@
 #ifndef MK_OBJECTS_H
 #define MK_OBJECTS_H
 
-#include <GL/glew.h>
-#include <MK/Core/File.h>
+#include <MK/Graphics.h>
 
 /**
  * @brief Structure representing an OpenGL shader program.
