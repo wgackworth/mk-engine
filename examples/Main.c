@@ -70,18 +70,16 @@ int main()
 
   // VAO, VBO, and EBO
   GLuint VAO;
-  GLuint VBO;
+  mk_gfx_VBO VBO = mk_gfx_emergeVBO(vertices, sizeof(vertices));
   GLuint EBO;
 
   glGenVertexArrays(1, &VAO);
-  glGenBuffers(1, &VBO);
   glGenBuffers(1, &EBO);
 
   glBindVertexArray(VAO);
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  mk_gfx_bindVBO(VBO);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
@@ -90,7 +88,7 @@ int main()
   glEnableVertexAttribArray(1);
 
   glBindVertexArray(0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  mk_gfx_unbindVBO(VBO);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
   // Line Mode
@@ -108,7 +106,7 @@ int main()
   }
 
   glDeleteVertexArrays(1, &VAO);
-  glDeleteBuffers(1, &VBO);
+  mk_gfx_deleteVBO(VBO);
   glDeleteBuffers(1, &EBO);
   mk_gfx_deleteShader(defaultShader);
   glfwDestroyWindow(window);

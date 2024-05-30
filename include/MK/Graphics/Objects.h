@@ -30,4 +30,35 @@ void mk_gfx_useShader(const mk_gfx_Shader shader);
  */
 void mk_gfx_deleteShader(const mk_gfx_Shader shader);
 
+/**
+ * @brief Structure representing an OpenGL Vertex Buffer Object (VBO).
+ */
+typedef struct mk_gfx_VBO
+{
+  GLuint ID;
+} mk_gfx_VBO;
+
+/**
+ * @brief Creates a Vertex Buffer Object (VBO) and fills it with data.
+ * @param vertices Pointer to the vertex data.
+ * @param size Size of the vertex data in bytes.
+ * @return A VBO.
+ */
+mk_gfx_VBO mk_gfx_emergeVBO(GLfloat* vertices, GLsizeiptr size);
+/**
+ * @brief Binds the specified VBO.
+ * @param VBO The VBO to bind.
+ */
+void mk_gfx_bindVBO(const mk_gfx_VBO VBO);
+/**
+ * @brief Unbinds the specified VBO.
+ * @param VBO The VBO to unbind.
+ */
+void mk_gfx_unbindVBO(const mk_gfx_VBO VBO);
+/**
+ * @brief Deletes the specified VBO.
+ * @param VBO The VBO to delete.
+ */
+void mk_gfx_deleteVBO(const mk_gfx_VBO VBO);
+
 #endif // MK_OBJECTS_H
