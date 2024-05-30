@@ -1,5 +1,5 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <MK/Core.h>
+#include <MK/Graphics.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -10,26 +10,6 @@ const char*        WINDOW_TITLE  = "GLFW";
 
 // Constants
 const unsigned int INFO_LOG_SIZE = 512u;
-
-// Shader Source Codes
-const char* vertexShaderSource =
-  "#version 330 core\n"
-  "layout (location = 0) in vec3 aPos;\n"
-  "layout (location = 1) in vec3 aCol;\n"
-  "out vec3 vertCol;\n"
-  "void main()\n"
-  "{\n"
-  "  vertCol = aCol;\n"
-  "  gl_Position = vec4(aPos, 1.f);\n"
-  "}\0";
-const char* fragmentShaderSource =
-  "#version 330 core\n"
-  "in vec3 vertCol;\n"
-  "out vec4 FragColor;\n"
-  "void main()\n"
-  "{\n"
-  "  FragColor = vec4(vertCol, 1.f);\n"
-  "}\0";
 
 // Vertices and Indices
 GLfloat vertices[] = {
@@ -91,6 +71,10 @@ int main()
   // Shaders
   GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
   GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+  // Shader Source Codes
+  const char* vertexShaderSource = mk_getFileContents("resources/Shaders/default.vert");
+  const char* fragmentShaderSource = mk_getFileContents("resources/Shaders/default.frag");
 
   glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
   glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
