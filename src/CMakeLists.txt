@@ -1,6 +1,8 @@
 # Library
 add_library(
   MK
+  Core.c
+  Constants.c
   File.c
   Color.c
   Graphics.c

@@ -87,6 +87,11 @@ int main()
   // Line Mode
   mk_gfx_useLineMode();
 
+  // Engine and Version Info
+  mk_printEngineInfo();
+  printf("\n");
+  mk_printVersionInfo();
+
   // Main Loop
   while (!glfwWindowShouldClose(window))
   {
