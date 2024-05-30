@@ -27,12 +27,12 @@ GLuint indices[] = {
 int main()
 {
   // Vector Testing
-  mk_Vec2 vecOne = mk_emergeVec2(1.f, 3.f);
-  mk_Vec2 vecTwo = mk_emergeVec2(4.f, -1.f);
-  mk_printVec2(
-    mk_multVec2Float(
-      mk_normalizeVec2(vecOne),
-      2.f
+  mk_Vec3 vecOne = mk_emergeVec3(1.f, 3.f, 4.f);
+  mk_Vec3 vecTwo = mk_emergeVec3(4.f, -1.f, -3.f);
+  mk_printVec3(
+    mk_crossVec3(
+      vecOne,
+      vecTwo
     )
   );
 
