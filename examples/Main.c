@@ -108,6 +108,14 @@ int main()
   while (mk_gfx_isWindowOpen(&window))
   {
     mk_gfx_updateWindow(&window);
+
+    if (mk_isKeyPressed(&window, MK_KEY_C))
+    { mk_gfx_usePointMode(); }
+    else if (mk_isKeyPressed(&window, MK_KEY_V))
+    { mk_gfx_useLineMode(); }
+    else if (mk_isKeyPressed(&window, MK_KEY_B))
+    { mk_gfx_useFillMode(); }
+
     mk_gfx_clearWindow(&window);
     mk_gfx_useShader(defaultShader);
     mk_gfx_bindVAO(VAO);

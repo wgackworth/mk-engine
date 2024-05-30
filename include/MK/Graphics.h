@@ -1,11 +1,8 @@
 #ifndef MK_GRAPHICS_H
 #define MK_GRAPHICS_H
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <MK/Core/Color.h>
 
-#include "Core/Color.h"
-#include "Core/File.h"
 #include "Graphics/Window.h"
 #include "Graphics/Objects.h"
 

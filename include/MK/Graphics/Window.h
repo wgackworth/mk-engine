@@ -1,7 +1,10 @@
 #ifndef MK_WINDOW_H
 #define MK_WINDOW_H
 
-#include <MK/Graphics.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 /**
  * @brief Structure representing a window in the MK engine.

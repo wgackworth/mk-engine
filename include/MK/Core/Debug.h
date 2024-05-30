@@ -1,7 +1,8 @@
 #ifndef MK_DEBUG_H
 #define MK_DEBUG_H
 
-#include <MK/Core.h>
+#include <stdio.h>
+#include "Space.h"
 
 /**
  * @brief Prints the components of a 2D vector.

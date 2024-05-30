@@ -1,7 +1,7 @@
 #ifndef MK_COLOR_H
 #define MK_COLOR_H
 
-#include <MK/Core.h>
+#include <stdint.h>
 
 /**
  * @brief Structure representing an RGBA color.

@@ -27,6 +27,7 @@ mk_gfx_Window mk_gfx_emergeWindow(const char* title, const unsigned int width, c
     return window;
   }
   glfwMakeContextCurrent(glfwInstance);
+  glPointSize(5.f);
   glfwSetFramebufferSizeCallback(glfwInstance, framebufferSizeCallback);
   return window;
 }

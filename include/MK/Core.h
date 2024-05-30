@@ -1,15 +1,12 @@
 #ifndef MK_CORE_H
 #define MK_CORE_H
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
 
 #include "Core/Constants.h"
 #include "Core/File.h"
 #include "Core/Color.h"
+#include "Core/Input.h"
 #include "Core/Space.h"
 #include "Core/Debug.h"
 
