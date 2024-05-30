@@ -106,3 +106,34 @@ void mk_gfx_deleteVBO(const mk_gfx_VBO VBO)
 {
   glDeleteBuffers(1, &VBO.ID);
 }
+
+mk_gfx_EBO mk_gfx_emergeEBO(GLuint* indices, GLsizeiptr size)
+{
+  GLuint ID;
+
+  glGenBuffers(1, &ID);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ID);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+  mk_gfx_EBO EBO =
+  {
+    .ID = ID
+  };
+  return EBO;
+}
+
+void mk_gfx_bindEBO(const mk_gfx_EBO EBO)
+{
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO.ID);
+}
+
+void mk_gfx_unbindEBO(const mk_gfx_EBO EBO)
+{
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void mk_gfx_deleteEBO(const mk_gfx_EBO EBO)
+{
+  glDeleteBuffers(1, &EBO.ID);
+}
