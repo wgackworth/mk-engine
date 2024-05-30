@@ -1,6 +1,6 @@
 #include <MK/Core/File.h>
 
-char* mk_getFileContents(const char* filePath)
+char*mk_getFileContents(const char* filePath)
 {
   FILE* file = fopen(filePath, "r");
   if (file == NULL)

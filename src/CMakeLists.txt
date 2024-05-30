@@ -2,6 +2,8 @@
 add_library(
   MK
   File.c
+  Graphics.c
+  Objects.c
 )
 
 # Linking Libraries

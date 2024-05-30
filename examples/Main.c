@@ -8,9 +8,6 @@ const unsigned int WINDOW_WIDTH  = 800u;
 const unsigned int WINDOW_HEIGHT = 600u;
 const char*        WINDOW_TITLE  = "GLFW";
 
-// Constants
-const unsigned int INFO_LOG_SIZE = 512u;
-
 // Vertices and Indices
 GLfloat vertices[] = {
   -0.5f,  -0.5f, 0.0f, 1.f, 1.f, 1.f,
@@ -68,59 +65,11 @@ int main()
   GLclampf alpha = 1.0f;
   glClearColor(red, green, blue, alpha);
 
-  // Shaders
-  GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-  GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-  // Shader Source Codes
-  const char* vertexShaderSource = mk_getFileContents("resources/Shaders/default.vert");
-  const char* fragmentShaderSource = mk_getFileContents("resources/Shaders/default.frag");
-
-  glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-  glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-  glCompileShader(vertexShader);
-  glCompileShader(fragmentShader);
-
-  // Shader Program
-  GLuint shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vertexShader);
-  glAttachShader(shaderProgram, fragmentShader);
-  glLinkProgram(shaderProgram);
-
-  // Info Log
-  char infoLog[INFO_LOG_SIZE];
-  int success = 0;
-
-  // Validating the Vertex Shader
-  glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-  if (!success)
-  {
-    glGetShaderInfoLog(vertexShader, INFO_LOG_SIZE, NULL, infoLog);
-    fprintf(stderr, "Failed to compile the vertex shader!\n");
-    fprintf(stderr, "Error: %s\n", infoLog);
-  }
-
-  // Validating the Fragment Shader
-  glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-  if (!success)
-  {
-    glGetShaderInfoLog(fragmentShader, INFO_LOG_SIZE, NULL, infoLog);
-    fprintf(stderr, "Failed to compile the fragment shader!\n");
-    fprintf(stderr, "Error: %s\n", infoLog);
-  }
-
-  // Validating the Shader Program
-  glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-  if (!success)
-  {
-    glGetProgramInfoLog(shaderProgram, INFO_LOG_SIZE, NULL, infoLog);
-    fprintf(stderr, "Failed to link the shader program!\n");
-    fprintf(stderr, "Error: %s\n", infoLog);
-  }
-
-  // Deleting the Shaders
-  glDeleteShader(vertexShader);
-  glDeleteShader(fragmentShader);
+  // Default Shader
+  mk_gfx_Shader defaultShader = mk_gfx_emergeShader(
+    "resources/Shaders/default.vert",
+    "resources/Shaders/default.frag"
+  );
 
   // VAO, VBO, and EBO
   GLuint VAO;
@@ -147,12 +96,15 @@ int main()
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+  // Line Mode
+  mk_gfx_useLineMode();
+
   // Main Loop
   while (!glfwWindowShouldClose(window))
   {
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT);
-    glUseProgram(shaderProgram);
+    mk_gfx_useShader(defaultShader);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);
     glfwSwapBuffers(window);
@@ -161,7 +113,7 @@ int main()
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
   glDeleteBuffers(1, &EBO);
-  glDeleteProgram(shaderProgram);
+  mk_gfx_deleteShader(defaultShader);
   glfwDestroyWindow(window);
   glfwTerminate();
   return EXIT_SUCCESS;
