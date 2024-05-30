@@ -29,12 +29,18 @@ mk_gfx_Window mk_gfx_emergeWindow(const char* title, const unsigned int width, c
   glfwMakeContextCurrent(glfwInstance);
   glPointSize(5.f);
   glfwSetFramebufferSizeCallback(glfwInstance, framebufferSizeCallback);
+
+  window._lastTime = (float)glfwGetTime();
+
   return window;
 }
 
-void mk_gfx_updateWindow(const mk_gfx_Window* window)
+void mk_gfx_updateWindow(mk_gfx_Window* window)
 {
   glfwPollEvents();
+  float currentTime = (float)glfwGetTime();
+  window->deltaTime = currentTime - window->_lastTime;
+  window->_lastTime = currentTime;
 }
 
 void mk_gfx_clearWindow(const mk_gfx_Window* window)

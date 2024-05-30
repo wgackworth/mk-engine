@@ -221,6 +221,20 @@ mk_Mat4 mk_multMat4Mat4(const mk_Mat4 matOne, const mk_Mat4 matTwo);
 const float* mk_valuePointerMat4(const mk_Mat4* mat);
 
 /**
+ * @brief Applies a translation to a 4x4 matrix using a 2D vector.
++ * @param mat The matrix to translate.
+ * @param vec The 2D vector representing the translation.
+ * @return The translated matrix.
+ */
+mk_Mat4 mk_transMat4Vec2(mk_Mat4 mat, const mk_Vec2 vec);
+/**
+ * @brief Applies a translation to a 4x4 matrix using a 3D vector.
+ * @param mat The matrix to translate.
+ * @param vec The 3D vector representing the translation.
+ * @return The translated matrix.
+ */
+mk_Mat4 mk_transMat4Vec3(mk_Mat4 mat, const mk_Vec3 vec);
+/**
  * @brief Creates an orthographic projection matrix.
  * @param left The coordinate for the left vertical clipping plane.
  * @param right The coordinate for the right vertical clipping plane.

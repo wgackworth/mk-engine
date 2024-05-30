@@ -15,6 +15,8 @@ typedef struct mk_gfx_Window
   GLuint width;
   GLuint height;
   GLFWwindow* glfwInstance;
+  float deltaTime;
+  float _lastTime;
 } mk_gfx_Window;
 
 /**
@@ -29,7 +31,7 @@ mk_gfx_Window mk_gfx_emergeWindow(const char* title, const unsigned int width, c
  * @brief Updates the specified window.
  * @param window Pointer to the window to update.
  */
-void mk_gfx_updateWindow(const mk_gfx_Window* window);
+void mk_gfx_updateWindow(mk_gfx_Window* window);
 /**
  * @brief Clears the specified window.
  * @param window Pointer to the window to clear.

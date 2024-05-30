@@ -84,8 +84,8 @@ mk_Vec2 mk_normalizeVec2(const mk_Vec2 vec)
   const float length = mk_lenVec2(vec);
   mk_Vec2 result =
   {
-    .x = length == 0.f ? 1.f : vec.x / length,
-    .y = length == 0.f ? 1.f : vec.y / length
+    .x = length == 0.f ? 0.f : vec.x / length,
+    .y = length == 0.f ? 0.f : vec.y / length
   };
   return result;
 }
@@ -166,9 +166,9 @@ mk_Vec3 mk_normalizeVec3(const mk_Vec3 vec)
   const float length = mk_lenVec3(vec);
   mk_Vec3 result =
   {
-    .x = length == 0.f ? 1.f : vec.x / length,
-    .y = length == 0.f ? 1.f : vec.y / length,
-    .z = length == 0.f ? 1.f : vec.z / length
+    .x = length == 0.f ? 0.f : vec.x / length,
+    .y = length == 0.f ? 0.f : vec.y / length,
+    .z = length == 0.f ? 0.f : vec.z / length
   };
   return result;
 }
@@ -256,6 +256,21 @@ mk_Mat4 mk_multMat4Mat4(const mk_Mat4 matOne, const mk_Mat4 matTwo)
 const float* mk_valuePointerMat4(const mk_Mat4* mat)
 {
   return &mat->elements[0][0];
+}
+
+mk_Mat4 mk_transMat4Vec2(mk_Mat4 mat, const mk_Vec2 vec)
+{
+  mat.elements[3][0] = vec.x;
+  mat.elements[3][1] = vec.y;
+  return mat;
+}
+
+mk_Mat4 mk_transMat4Vec3(mk_Mat4 mat, const mk_Vec3 vec)
+{
+  mat.elements[3][0] = vec.x;
+  mat.elements[3][1] = vec.y;
+  mat.elements[3][2] = vec.z;
+  return mat;
 }
 
 mk_Mat4 mk_ortho(const float left, const float right, const float bottom, const float top, const float zNear, const float zFar)

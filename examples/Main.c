@@ -80,6 +80,9 @@ int main()
   printf("\n");
   mk_printVersionInfo();
 
+  // Player Position
+  mk_Vec2 playerPosition = mk_emergeVec2(0.f, 0.f);
+
   // Main Loop
   while (mk_gfx_isWindowOpen(&window))
   {
@@ -92,7 +95,36 @@ int main()
     else if (mk_isKeyPressed(&window, MK_KEY_B))
     { mk_gfx_useFillMode(); }
 
-    mk_Mat4 model = mk_emergeMat4(1.f);
+    mk_Vec2 movement = mk_emergeVec2(0.f, 0.f);
+    if (mk_isKeyPressed(&window, MK_KEY_W))
+    {
+      movement.y -= 1.f;
+    }
+    if (mk_isKeyPressed(&window, MK_KEY_S))
+    {
+      movement.y += 1.f;
+    }
+    if (mk_isKeyPressed(&window, MK_KEY_A))
+    {
+      movement.x -= 1.f;
+    }
+    if (mk_isKeyPressed(&window, MK_KEY_D))
+    {
+      movement.x += 1.f;
+    }
+
+    playerPosition = mk_addVec2(
+      playerPosition,
+      mk_multVec2Float(
+        mk_normalizeVec2(movement),
+        100.f * window.deltaTime
+      )
+    );
+
+    mk_Mat4 model = mk_transMat4Vec2(
+      mk_emergeMat4(1.f),
+      playerPosition
+    );
     mk_Mat4 view = mk_emergeMat4(1.f);
     mk_Mat4 projection = mk_ortho(
       0.f,
