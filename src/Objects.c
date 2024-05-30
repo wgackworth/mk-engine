@@ -137,3 +137,37 @@ void mk_gfx_deleteEBO(const mk_gfx_EBO EBO)
 {
   glDeleteBuffers(1, &EBO.ID);
 }
+
+mk_gfx_VAO mk_gfx_emergeVAO()
+{
+  GLuint ID;
+  glGenVertexArrays(1, &ID);
+  mk_gfx_VAO VAO =
+  {
+    .ID = ID
+  };
+  return VAO;
+}
+
+void mk_gfx_bindVAO(const mk_gfx_VAO VAO)
+{
+  glBindVertexArray(VAO.ID);
+}
+
+void mk_gfx_unbindVAO(const mk_gfx_VAO VAO)
+{
+  glBindVertexArray(0);
+}
+
+void mk_gfx_deleteVAO(const mk_gfx_VAO VAO)
+{
+  glDeleteVertexArrays(1, &VAO.ID);
+}
+
+void mk_gfx_linkAttribVAO(const mk_gfx_VBO* VBO, GLuint layout, GLuint size, GLenum type, GLsizeiptr stride, const void* offset)
+{
+  mk_gfx_bindVBO(*VBO);
+  glVertexAttribPointer(layout, size, type, GL_FALSE, stride, offset);
+  glEnableVertexAttribArray(layout);
+  mk_gfx_unbindVBO(*VBO);
+}

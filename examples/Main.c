@@ -69,22 +69,18 @@ int main()
   );
 
   // VAO, VBO, and EBO
-  GLuint VAO;
+  mk_gfx_VAO VAO = mk_gfx_emergeVAO();
   mk_gfx_VBO VBO = mk_gfx_emergeVBO(vertices, sizeof(vertices));
   mk_gfx_EBO EBO = mk_gfx_emergeEBO(indices, sizeof(indices));
 
-  glGenVertexArrays(1, &VAO);
-
-  glBindVertexArray(VAO);
+  mk_gfx_bindVAO(VAO);
   mk_gfx_bindVBO(VBO);
   mk_gfx_bindEBO(EBO);
 
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-  glEnableVertexAttribArray(1);
+  mk_gfx_linkAttribVAO(&VBO, 0, 3, GL_FLOAT, 6 * sizeof(GLfloat), (void*)0);
+  mk_gfx_linkAttribVAO(&VBO, 1, 3, GL_FLOAT, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 
-  glBindVertexArray(0);
+  mk_gfx_unbindVAO(VAO);
   mk_gfx_unbindVBO(VBO);
   mk_gfx_unbindEBO(EBO);
 
@@ -97,12 +93,13 @@ int main()
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT);
     mk_gfx_useShader(defaultShader);
-    glBindVertexArray(VAO);
+    mk_gfx_bindVAO(VAO);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);
     glfwSwapBuffers(window);
   }
 
-  glDeleteVertexArrays(1, &VAO);
+  // Termination
+  mk_gfx_deleteVAO(VAO);
   mk_gfx_deleteVBO(VBO);
   mk_gfx_deleteEBO(EBO);
   mk_gfx_deleteShader(defaultShader);

@@ -92,4 +92,43 @@ void mk_gfx_unbindEBO(const mk_gfx_EBO EBO);
  */
 void mk_gfx_deleteEBO(const mk_gfx_EBO EBO);
 
+/**
+ * @brief Structure representing an OpenGL Vertex Array Object (VAO).
+ */
+typedef struct mk_gfx_VAO
+{
+  GLuint ID;
+} mk_gfx_VAO;
+
+/**
+ * @brief Creates a Vertex Array Object (VAO).
+ * @return A VAO.
+ */
+mk_gfx_VAO mk_gfx_emergeVAO();
+/**
+ * @brief Binds the specified VAO.
+ * @param VAO The VAO to bind.
+ */
+void mk_gfx_bindVAO(const mk_gfx_VAO VAO);
+/**
+ * @brief Unbinds the specified VAO.
+ * @param VAO The VAO to unbind.
+ */
+void mk_gfx_unbindVAO(const mk_gfx_VAO VAO);
+/**
+ * @brief Deletes the specified VAO.
+ * @param VAO The VAO to delete.
+ */
+void mk_gfx_deleteVAO(const mk_gfx_VAO VAO);
+/**
+ * @brief Links a VBO to a VAO with vertex attribute specifications.
+ * @param VBO The VBO to link.
+ * @param layout Attribute layout index.
+ * @param size Number of components per vertex attribute (1-4).
+ * @param type Data type of each component.
+ * @param stride Byte offset between consecutive vertex attributes.
+ * @param offset Byte offset of the first component of the first vertex attribute.
+ */
+void mk_gfx_linkAttribVAO(const mk_gfx_VBO* VBO, GLuint layout, GLuint size, GLenum type, GLsizeiptr stride, const void* offset);
+
 #endif // MK_OBJECTS_H
